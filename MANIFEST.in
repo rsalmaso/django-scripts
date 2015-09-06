@@ -1,0 +1,5 @@
+include bin/dj2
+include bin/dj3
+include bin/rs2
+include bin/rs3
+include README.md COPYING

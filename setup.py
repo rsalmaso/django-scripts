@@ -21,26 +21,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import absolute_import, division, print_function #, unicode_literals
 import io
 import os
 from setuptools import setup
+import django_scripts
 
-__author__ = "Raffaele Salmaso",
-__author_mail__ = "raffaele@salmaso.org",
-__version__ = "0.1.0a0"
 
 setup(
-    packages=[],
+    packages=["django_scripts"],
     name="django-scripts",
-    version=__version__,
+    version=django_scripts.__version__,
     description = io.open(os.path.join(os.path.dirname(__file__), "README.md"), "rU").read(),
     long_description="",
-    author=__author__,
-    author_email=__author_mail__,
+    author=django_scripts.__author__,
+    author_email=django_scripts.__author_email__,
     url="https://bitbucket.org/rsalmaso/django-scripts",
     license="MIT License",
-    classifiers=["License :: OSI Approved :: MIT License",
+    classifiers=[
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
@@ -51,15 +50,17 @@ setup(
         "Topic :: Utilities",
         "Development Status :: 4 - Beta",
     ],
-    scripts=[
-        "bin/dj",
-        "bin/dj2",
-        "bin/dj3",
-        "bin/rs",
-        "bin/rs2",
-        "bin/rs3",
-    ],
+    entry_points={
+        'console_scripts': [
+            'dj = django_scripts.dj:main',
+            'dj2 = django_scripts.dj:main',
+            'dj3 = django_scripts.dj:main',
+            'rs = django_scripts.rs:main',
+            'rs2 = django_scripts.rs:main',
+            'rs3 = django_scripts.rs:main',
+        ],
+    },
     include_package_data=True,
-    install_requires=[],
+    install_requires=["stua"],
     zip_safe=False,
 )

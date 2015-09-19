@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-# Copyright (C) 2007-2015, Raffaele Salmaso <raffaele@salmaso.org>
+# Copyright (C) 1999-2015, Raffaele Salmaso <raffaele@salmaso.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,44 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import sys
-import os
-from os.path import dirname
-import subprocess
+from __future__ import absolute_import, division, print_function, unicode_literals
+from stua.version import get_version, HG
 
-def system(*args, **kwargs):
-    env = kwargs.pop('env', None)
-    return subprocess.call(list(args), env=env)
+VERSION = (0, 1, 0, "alpha", 0)
 
-def build_cmd(manage="./manage.py"):
-    cmd = []
-
-    if sys.argv[0].split('/')[-1] == 'dj2':
-        cmd.append('python2')
-    elif sys.argv[0].split('/')[-1] == 'dj3':
-        cmd.append('python3')
-    cmd.append(manage)
-
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'test':
-            cmd.append('test')
-            cmd.append('--verbosity=2')
-            cmd.extend(sys.argv[2:])
-        else:
-            cmd.extend(sys.argv[1:])
-
-    return cmd
-
-def main():
-    path = os.getcwd()
-
-    while path != '/':
-        manage = os.path.join(path, 'manage.py')
-        if os.path.exists(manage):
-            os.chdir(path)
-            cmd = build_cmd(manage)
-            system(*cmd)
-        path = dirname(path)
-
-if __name__ == '__main__':
-    main()
+__author__ = "Raffaele Salmaso"
+__author_email__ = "raffaele@salmaso.org"
+__version__ = get_version(version=VERSION, vcs=HG, filename=__file__)

@@ -32,7 +32,7 @@ setup(
     packages=["django_scripts"],
     name="django-scripts",
     version=django_scripts.__version__,
-    description = io.open(os.path.join(os.path.dirname(__file__), "README.md"), "rU").read(),
+    description = io.open(os.path.join(os.path.dirname(__file__), "README.md"), "rt").read(),
     long_description="",
     author=django_scripts.__author__,
     author_email=django_scripts.__author_email__,

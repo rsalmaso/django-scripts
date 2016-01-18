@@ -64,12 +64,15 @@ class Command(BaseCommand):
     def handle(self, command, args):
         path = self.find_manage_py()
 
+        status = 0
         if path:
             os.chdir(path)
             cmd = self.build_cmd(command, args)
-            system(*cmd)
+            status = system(*cmd)
+        return status
 
 
 def main():
     dj = Command()
-    dj.run(sys.argv)
+    status = dj.run(sys.argv)
+    sys.exit(status)

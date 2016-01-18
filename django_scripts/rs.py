@@ -41,6 +41,7 @@ class RunServer(object):
         else:
             args.append("--insecure")
 
+        status = 0
         path = self.path
         while path != '/':
             manage = os.path.join(path, 'manage.py')
@@ -53,8 +54,9 @@ class RunServer(object):
                     pass
                 cmd.extend([manage, 'runserver', "{}:{}".format(self.addr, self.port)])
                 cmd.extend(args)
-                system(*cmd)
+                status = system(*cmd)
             path = dirname(path)
+        return status
 
 
 class ServerCommand(ArgumentCommand):
@@ -92,9 +94,10 @@ class ServerCommand(ArgumentCommand):
         path = os.getcwd()
 
         server = RunServer(command=command, addr=addr, port=port, path=path)
-        server.start(options, args)
+        return server.start(options, args)
 
 
 def main():
     cmd = ServerCommand()
-    cmd.run(sys.argv)
+    status = cmd.run(sys.argv)
+    sys.exit(status)

@@ -1,5 +1,9 @@
 # Changes
 
+## dev
+
+* drop `rs` script
+
 ## 1.0.2
 
 * return wrapped status code

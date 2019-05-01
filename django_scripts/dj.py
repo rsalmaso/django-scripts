@@ -62,7 +62,7 @@ class Command(BaseCommand):
         if path:
             os.chdir(path)
             cmd = self.build_cmd(args)
-            status = system(*cmd)
+            status = system(*cmd, env=os.environ)
         return status
 
 

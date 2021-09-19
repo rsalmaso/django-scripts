@@ -9,6 +9,7 @@
   script with `DJANGO_COMMAND` env var
 * allow to customize the python runtime
   with `PYTHON` env var
+* added `djs` and `djr` commands
 
 ## 1.0.2
 

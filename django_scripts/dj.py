@@ -77,3 +77,35 @@ def main():
     dj = Command()
     status = dj.run(sys.argv)
     sys.exit(status)
+
+
+def main_shell():
+    sh = system(
+        [
+            PYTHON,
+            "-c",
+            "import django_extensions.management.commands.shell_plus",
+        ],
+        env=os.environ,
+        capture_output=True,
+    )
+    dj = Command()
+    sys.argv.insert(1, "shell" if sh.returncode else "shell_plus")
+    status = dj.run(sys.argv)
+    sys.exit(status)
+
+
+def main_runserver():
+    sh = system(
+        [
+            PYTHON,
+            "-c",
+            "import django_extensions.management.commands.runserver_plus",
+        ],
+        env=os.environ,
+        capture_output=True,
+    )
+    dj = Command()
+    sys.argv.insert(1, "runserver" if sh.returncode else "runserver_plus")
+    status = dj.run(sys.argv)
+    sys.exit(status)

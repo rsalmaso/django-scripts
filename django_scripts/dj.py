@@ -29,6 +29,7 @@ from stua.os import system
 
 
 COMMAND = os.environ.get("DJANGO_COMMAND", "manage.py")
+PYTHON = os.environ.get("PYTHON", "python3")
 
 
 class Command(BaseCommand):
@@ -46,7 +47,7 @@ class Command(BaseCommand):
         cmd = []
 
         try:
-            cmd.append(os.environ["PYTHON"])
+            cmd.append(PYTHON)
         except:
             pass
         cmd.append("./{}".format(COMMAND))

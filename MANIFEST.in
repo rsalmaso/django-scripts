@@ -1,2 +1,2 @@
 include django_scripts/*
-include README.md COPYING
+include README.md LICENSE

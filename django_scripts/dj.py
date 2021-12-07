@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # Copyright (C) Raffaele Salmaso <raffaele@salmaso.org>
 #
@@ -21,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from __future__ import absolute_import, division, print_function, unicode_literals
 import sys
 import os
 from os.path import dirname
@@ -40,16 +38,8 @@ class Command(BaseCommand):
             path = dirname(path)
         return False
 
-    def build_cmd(self, command, args):
-        cmd = []
-
-        command = command.split('/')[-1]
-        try:
-            cmd.append({"dj2": "python2", "dj3": "python3"}[command])
-        except:
-            pass
-
-        cmd.append("./manage.py")
+    def build_cmd(self, args):
+        cmd = ["./manage.py"]
 
         if len(args) > 0:
             if args[0] == 'test':
@@ -67,7 +57,7 @@ class Command(BaseCommand):
         status = 0
         if path:
             os.chdir(path)
-            cmd = self.build_cmd(command, args)
+            cmd = self.build_cmd(args)
             status = system(*cmd)
         return status
 

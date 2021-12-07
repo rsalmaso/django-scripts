@@ -3,6 +3,7 @@
 ## dev
 
 * drop `rs` script
+* drop support for python < 3.8
 
 ## 1.0.2
 

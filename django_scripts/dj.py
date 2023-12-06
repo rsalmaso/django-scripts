@@ -24,6 +24,7 @@ import os
 from os.path import dirname
 import sys
 
+import readenv.loads  # noqa: F401
 from stua.commands import BaseCommand
 from stua.os import system
 
@@ -50,7 +51,7 @@ class Command(BaseCommand):
             cmd.append(PYTHON)
         except:
             pass
-        cmd.append("./{}".format(COMMAND))
+        cmd.append(f"./{COMMAND}")
 
         if len(args) > 0:
             if args[0] == "test":
@@ -79,33 +80,28 @@ def main():
     sys.exit(status)
 
 
-def main_shell():
+def _check_command(module):
     sh = system(
         [
             PYTHON,
             "-c",
-            "import django_extensions.management.commands.shell_plus",
+            f"import importlib.util; import sys; sys.exit(not bool(importlib.util.find_spec('{module}')))",
         ],
         env=os.environ,
         capture_output=True,
     )
+    return sh.returncode
+def main_shell():
     dj = Command()
-    sys.argv.insert(1, "shell" if sh.returncode else "shell_plus")
+    has_command = _check_command("django_extensions.management.commands.shell_plus")
+    sys.argv.insert(1, "shell" if has_command else "shell_plus")
     status = dj.run(sys.argv)
     sys.exit(status)
 
 
 def main_runserver():
-    sh = system(
-        [
-            PYTHON,
-            "-c",
-            "import django_extensions.management.commands.runserver_plus",
-        ],
-        env=os.environ,
-        capture_output=True,
-    )
     dj = Command()
-    sys.argv.insert(1, "runserver" if sh.returncode else "runserver_plus")
+    has_command = _check_command("django_extensions.management.commands.runserver_plus")
+    sys.argv.insert(1, "runserver" if has_command else "runserver_plus")
     status = dj.run(sys.argv)
     sys.exit(status)

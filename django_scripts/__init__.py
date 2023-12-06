@@ -20,7 +20,7 @@
 
 from stua.version import get_version, HG
 
-VERSION = (1, 0, 2, "final", 0)
+VERSION = (2, 0, 0, "final", 0)
 
 __author__ = "Raffaele Salmaso"
 __author_email__ = "raffaele@salmaso.org"

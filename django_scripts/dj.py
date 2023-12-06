@@ -20,9 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import sys
 import os
 from os.path import dirname
+import sys
+
 from stua.commands import BaseCommand
 from stua.os import system
 
@@ -31,8 +32,8 @@ class Command(BaseCommand):
     def find_manage_py(self, path=None):
         path = path or os.getcwd()
 
-        while path != '/':
-            manage = os.path.join(path, 'manage.py')
+        while path != "/":
+            manage = os.path.join(path, "manage.py")
             if os.path.exists(manage):
                 return path
             path = dirname(path)
@@ -42,11 +43,11 @@ class Command(BaseCommand):
         cmd = ["./manage.py"]
 
         if len(args) > 0:
-            if args[0] == 'test':
+            if args[0] == "test":
                 # test are always verbose if not tell otherwise
                 verbosity = [True for arg in args if arg.startswith("--verbosity")]
                 if not verbosity:
-                    args.append('--verbosity=2')
+                    args.append("--verbosity=2")
         cmd.extend(args)
 
         return cmd

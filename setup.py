@@ -22,15 +22,16 @@
 
 import io
 import os
-from setuptools import setup
-import django_scripts
 
+from setuptools import setup
+
+import django_scripts
 
 setup(
     packages=["django_scripts"],
     name="django-scripts",
     version=django_scripts.__version__,
-    description = io.open(os.path.join(os.path.dirname(__file__), "README.md"), "rt").read(),
+    description=io.open(os.path.join(os.path.dirname(__file__), "README.md"), "rt").read(),
     long_description="",
     author=django_scripts.__author__,
     author_email=django_scripts.__author_email__,
@@ -49,13 +50,9 @@ setup(
         "Topic :: Utilities",
         "Development Status :: 4 - Beta",
     ],
-    entry_points={
-        'console_scripts': [
-            'dj = django_scripts.dj:main',
-        ],
-    },
+    entry_points={"console_scripts": ["dj = django_scripts.dj:main"]},
     include_package_data=True,
     install_requires=["stua"],
     zip_safe=False,
-    python_requires='>=3',
+    python_requires=">=3",
 )

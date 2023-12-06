@@ -43,7 +43,13 @@ class Command(BaseCommand):
         return False
 
     def build_cmd(self, args):
-        cmd = ["./manage.py"]
+        cmd = []
+
+        try:
+            cmd.append(os.environ["PYTHON"])
+        except:
+            pass
+        cmd.append("./{}".format(COMMAND))
 
         if len(args) > 0:
             if args[0] == "test":

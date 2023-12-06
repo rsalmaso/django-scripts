@@ -28,12 +28,15 @@ from stua.commands import BaseCommand
 from stua.os import system
 
 
+COMMAND = os.environ.get("DJANGO_COMMAND", "manage.py")
+
+
 class Command(BaseCommand):
     def find_manage_py(self, path=None):
         path = path or os.getcwd()
 
         while path != "/":
-            manage = os.path.join(path, "manage.py")
+            manage = os.path.join(path, COMMAND)
             if os.path.exists(manage):
                 return path
             path = dirname(path)

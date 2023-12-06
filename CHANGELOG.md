@@ -5,6 +5,8 @@
 * drop `rs` script
 * drop support for python < 3.8
 * format and lint code with ruff
+* allow to customise the django command
+  script with `DJANGO_COMMAND` env var
 
 ## 1.0.2
 
